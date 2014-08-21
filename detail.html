@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.css" />
+    <style type="text/css">
+        .table th, .table td {
+            font-size: 12px;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+
+<div id="grid">
+
+</div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.8/d3.min.js"></script>
+
+<script>
+
+        if(parent) {
+
+            var rows = parent.ANLZ.filter.data(),
+                columns = d3.keys(rows[0]),
+                ignore = parent.ANLZ.settings.detailIgnore,
+                length = ignore.length;
+
+            while (length--) {
+                var remove = columns.indexOf(ignore[length]);
+                if(remove > -1) {
+                    columns.splice(remove, 1);
+                }
+            }
+
+            columns.sort();
+
+            function tabulate(data, columns) {
+                var table = d3.select("#grid").append("table"),
+                        thead = table.append("thead"),
+                        tbody = table.append("tbody");
+
+                table.attr("class", "table table-bordered");
+
+                // append the header row
+                thead.append("tr")
+                        .selectAll("th")
+                        .data(columns)
+                        .enter()
+                        .append("th")
+                        .text(function(column) { return column; });
+
+                // create a row for each object in the data
+                var rows = tbody.selectAll("tr")
+                        .data(data)
+                        .enter()
+                        .append("tr");
+
+                // create a cell in each row for each column
+                var cells = rows.selectAll("td")
+                        .data(function(row, i) {
+                            return columns.map(function(column) {
+                                return {column: column, value: row[column]};
+                            });
+                        })
+                        .enter()
+                        .append("td")
+                        .text(function(d) {
+                            return d.value;
+                        });
+
+                return table;
+            }
+
+            var quoteTable = tabulate(rows, columns);
+
+            parent.ANLZ.util.loaded();
+
+        }
+
+</script>
+
+</body>
+</html>
