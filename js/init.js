@@ -179,7 +179,7 @@ ANLZ.init = {
             ANLZ.search.save();
         });
 
-        self.clickActiveBtns();
+        //self.clickActiveBtns();
 
     },
 
