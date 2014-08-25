@@ -21,16 +21,21 @@ ANLZ.filter = {
 
         function setFilterRow(k, v) {
 
+            var key = k,
+                value = v;
+
             d3.selectAll("#filters table tbody tr").each(function () {
 
                 var that = d3.select(this),
                     row = that.datum();
 
-                if (row === k) {
+                if (row === key) {
                     that.attr("class", "")
                         .select("td.value")
-                        .text(v);
-                    self.fields[row] = v;
+                        .text(function () {
+                            return (isNaN(Date.parse(value))) ? value : ANLZ.util.formatDate(value);
+                        });
+                    self.fields[row] = value;
 
                     that.select("button.remove")
                         .on("click", function (d) {
@@ -96,17 +101,17 @@ ANLZ.filter = {
     rowCountWarning: function (rows) {
         var color,
             message;
-        if (rows > 5000) {
+        if (rows <= 1000) {
+            color = "green";
+            message = "";
+        }
+        else if (rows > 5000) {
             color = "red";
             message = "This could take a minute.";
         }
         else {
             color = "#f0ad4e";
             message = "Should just be a few seconds.";
-        }
-        if (rows <= 1000) {
-            color = "green";
-            message = "";
         }
         return {color: color, message: message};
     },

@@ -62,11 +62,6 @@ ANLZ.chart.select = function (btn, myData) {
 
     this.clear(chart);
 
-    /*if(val.length == 1 && chartType != "grid") {
-        this.single(key, val, '#' + chart); //chart.single.js
-        return
-    }*/
-
     switch (chartType) {
         case "pie":
             this.pie(key, val, '#' + chart); //chart.pie.js

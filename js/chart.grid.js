@@ -3,7 +3,8 @@ ANLZ.chart = ANLZ.chart || {};
 
 ANLZ.chart.grid= function (field, data, target) {
 
-    var filter = ANLZ.filter;
+    var filter = ANLZ.filter,
+        util = ANLZ.util;
 
     if(target != "#timeline") {
         data = data.sort(function(a, b) {
@@ -14,53 +15,58 @@ ANLZ.chart.grid= function (field, data, target) {
         data = filter.saleMade(data);
     }
 
-    var grid = d3.select(target + " .chart")
-        .append("table")
-        .attr("class", "table table-hover")
+    if(data.length>0) {
 
-    var headRow = grid.append("thead")
-        .append("tr");
+        var grid = d3.select(target + " .chart")
+            .append("table")
+            .attr("class", "table table-hover")
 
-    headRow.append("th")
-        .text(field);
+        var headRow = grid.append("thead")
+            .append("tr");
 
-    for (i = 0; i < d3.keys(data[0].values).length; i++) {
-        var key = d3.keys(data[0].values)[i];
         headRow.append("th")
-            .attr("class", "text-right")
-            .text(key.split('_').join(' '));
-    }
+            .text(field);
 
-    var tbody = grid.append("tbody");
+        for (i = 0; i < d3.keys(data[0].values).length; i++) {
+            var key = d3.keys(data[0].values)[i];
+            headRow.append("th")
+                .attr("class", "text-right")
+                .text(key.split('_').join(' '));
+        }
 
-    var row = tbody.selectAll("tr")
-        .data(data)
-        .enter().append("tr")
-        .on("click", function(d) {
-            filter.add(field, d.key);
-            if(target === "#prospects" || target === "#timeline") {
-                filter.skipField(field);
-            }
-        });
+        var tbody = grid.append("tbody");
 
-    row.append("td")
-        .text(function(d) {
-            return d.key;
-        });
-
-    for (i = 0; i < d3.keys(data[0].values).length; i++) {
-        var key = d3.keys(data[0].values)[i],
-            moneyFormat = function(n, currency) {
-                return currency + n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
-            },
-            isTotal = function(key) {
-                return key.indexOf("Total") != -1;
-            };
-        row.append("td")
-            .attr("class", "text-right")
-            .text(function(d) {
-                return (isTotal(key)) ? moneyFormat(d.values[key], "$") : d.values[key];
+        var row = tbody.selectAll("tr")
+            .data(data)
+            .enter().append("tr")
+            .on("click", function (d) {
+                filter.add(field, d.key);
+                if (target === "#prospects" || target === "#timeline") {
+                    filter.skipField(field);
+                }
             });
+
+        row.append("td")
+            .text(function (d) {
+                var key = (target === "#timeline") ? util.formatDate(d.key) : d.key;
+                return key;
+            });
+
+        for (i = 0; i < d3.keys(data[0].values).length; i++) {
+            var key = d3.keys(data[0].values)[i],
+                moneyFormat = function (n, currency) {
+                    return currency + n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
+                },
+                isTotal = function (key) {
+                    return key.indexOf("Total") != -1;
+                };
+            row.append("td")
+                .attr("class", "text-right")
+                .text(function (d) {
+                    return (isTotal(key)) ? moneyFormat(d.values[key], "$") : d.values[key];
+                });
+        }
+
     }
 
 };

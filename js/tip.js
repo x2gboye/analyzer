@@ -12,10 +12,9 @@ ANLZ.tip = {
     },
 
     //update tip position, data
-    show: function (left, top, field, key, values) {
+    show: function (left, top, key, values) {
 
         var tip = $("#chartTip"),
-            fieldTD = tip.find(".field"),
             keyTD = tip.find(".key"),
             valueTD = tip.find(".value"),
             moneyFormat = function(n, currency) {
@@ -25,7 +24,6 @@ ANLZ.tip = {
                 return key.indexOf("Total") != -1;
             };
 
-        fieldTD.text(field);
         keyTD.text(key);
         valueTD.text(values.total);
 

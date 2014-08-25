@@ -19,13 +19,12 @@ ANLZ.settings = {
     range: [
         "Quote Year Created",
         "Quote Year and Month Created",
-        "Quote Date Created"/*,
-         "Sale Written Year",
-         "Sale Written Year and Month",
-         "Sale Written Date Created",
-         "Sale Written Week Of Year",
-         "Sale Written Day Of Month"*/
-
+        "Quote Date Created"/**/,
+        "Sale Written Year",
+        "Sale Written Year and Month",
+        "Sale Written Date Created",
+        "Sale Written Week Of Year",
+        "Sale Written Day Of Month"
     ],
 
     detailIgnore: [
@@ -33,7 +32,6 @@ ANLZ.settings = {
         "Quote Year and Month Created",
         "Sale Written Year",
         "Sale Written Year and Month"
-
     ],
 
     margin: {

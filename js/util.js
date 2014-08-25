@@ -51,12 +51,29 @@ ANLZ.util = {
 
     mouse: {x: 0, y: 0},
 
-    formatDate: function(format, date) {
+    getDateParts: function(format, date) {
         var date = format.parse(date),
             year = date.getFullYear().toString().substr(2, 2),
             month = date.getMonth() + 1,
             day = date.getDate();
         return { year: year, month: month, day: day };
+    },
+
+    formatDate: function(date) {
+        var self = this,
+            len = date.length;
+        switch (len) {
+            case 7:
+                var date = self.getDateParts(d3.time.format("%Y-%m"), date);
+                return date.month+"/"+date.year;
+                break;
+            case 10:
+                var date = self.getDateParts(d3.time.format("%Y-%m-%d"), date);
+                return date.month+"/"+date.day+"/"+date.year;
+                break;
+            default:
+                return date;
+        }
     }
 
 };
