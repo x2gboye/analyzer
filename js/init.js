@@ -179,7 +179,7 @@ ANLZ.init = {
             ANLZ.search.save();
         });
 
-        //self.clickActiveBtns();
+        self.clickActiveBtns();
 
     },
 
@@ -211,7 +211,7 @@ ANLZ.init = {
                 });
                 $('.loading').show();
                 setTimeout(function () {
-                    iframe.attr("src", "detail.html?v=0.3");
+                    iframe.attr("src", "detail.html?v=0.4");
                 }, 250);
             }
         });
