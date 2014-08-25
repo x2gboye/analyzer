@@ -33,6 +33,26 @@ ANLZ.chart.bar = function (field, data, target) {
         .range([container.height, 0]);
 
     var xAxis = d3.svg.axis()
+        .tickFormat(function(d) {
+            if(target === "#timeline") {
+                switch (field) {
+                    case "Quote Year and Month Created":
+                        var date = ANLZ.util.formatDate(d3.time.format("%Y-%m"), d);
+                        date = date.month+"/"+date.year;
+                        break;
+                    case "Quote Date Created":
+                        var date = ANLZ.util.formatDate(d3.time.format("%Y-%m-%d"), d);
+                        date = date.month+"/"+date.day+"/"+date.year;
+                        break;
+                    default:
+                        date = d;
+                }
+                return date;
+            }
+            else {
+                return d;
+            }
+        })
         .scale(x)
         .orient("bottom");
 

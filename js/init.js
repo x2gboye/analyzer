@@ -60,9 +60,7 @@ ANLZ.init = {
                 "Most Recent Contact Source Type Prior To Quote": d.value["Most Recent Contact Source Type Prior To Quote"],
                 "Made Sale": d.value["Made Sale"],
                 "Most Recent Contact Source Prior To Quote": d.value["Most Recent Contact Source Prior To Quote"],
-                "Prospect Phone": d.value["Prospect Phone"],
-                "Quote Comment": d.value["Quote Comment"],
-                "Prospect Name": d.value["Prospect Name"]
+                "Quote Comment": d.value["Quote Comment"]
             };
 
         });
@@ -213,7 +211,7 @@ ANLZ.init = {
                 });
                 $('.loading').show();
                 setTimeout(function () {
-                    iframe.attr("src", "detail.html?v=0.2");
+                    iframe.attr("src", "detail.html?v=0.3");
                 }, 250);
             }
         });

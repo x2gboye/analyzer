@@ -80,7 +80,7 @@ ANLZ.chart.single = function (field, data, target) {
             .attr("fill", function(d, i) {
                 return color[i];
             })
-            .attr("stroke", "white")
+            //.attr("stroke", "white")
             .attr("d", d3.svg.arc().outerRadius(0).innerRadius(0))
             .transition()
             .duration(500)

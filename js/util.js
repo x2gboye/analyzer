@@ -49,6 +49,14 @@ ANLZ.util = {
         $('.loading').hide();
     },
 
-    mouse: {x: 0, y: 0}
+    mouse: {x: 0, y: 0},
+
+    formatDate: function(format, date) {
+        var date = format.parse(date),
+            year = date.getFullYear().toString().substr(2, 2),
+            month = date.getMonth() + 1,
+            day = date.getDate();
+        return { year: year, month: month, day: day };
+    }
 
 };
