@@ -1,8 +1,13 @@
-svg {
-  //background: red;
-}
+
+$md: 1279px;
+$sm: 1023px;
+
+
 body, html {
-  height: 100%;
+  //min-width: 700px;
+  @media (min-width: $md+1) {
+    height: 100%;
+  }
 }
 
 body {
@@ -11,8 +16,16 @@ body {
 
 nav {
   width: 80px;
-  float: left;
+  position: fixed;
+  top: 0;
+  left: 0;
   overflow: hidden;
+  z-index: 100;
+  @media (max-width: $sm) {
+    width: 100%;
+    background: #ebebeb;
+    padding-bottom: 5px;
+  }
 
   .nav-pills {
     > li {
@@ -21,8 +34,15 @@ nav {
         border-radius: 0;
         text-align: center;
         color: rgba(255, 255, 255, 0.85);
+        @media (max-width: $sm) {
+          background: #333;
+          box-shadow: none;
+        }
         &:hover {
           background: transparent;
+          @media (max-width: $sm) {
+            background: #333;
+          }
         }
         &:hover,
         &:active,
@@ -42,17 +62,26 @@ nav {
       }
       &.active > a {
         background: #ebebeb;
-        color: #333;
         box-shadow: -1px 1px 10px 0 rgba(0, 0, 0, 0.95);
+        @media (max-width: $sm) {
+          box-shadow: none;
+        }
         &:hover,
         &:active,
         &:focus {
           color: #000;
           background: #ebebeb;
+          @media (max-width: $sm) {
+            box-shadow: none;
+          }
         }
         > .badge {
           color: #fff;
         }
+      }
+      &.active a,
+      &.active a span.txt {
+        color: #333;
       }
     }
   }
@@ -63,9 +92,26 @@ nav {
     > li {
       margin: 0;
       border: 0;
+      @media (max-width: $sm) {
+        float: left;
+        width: 33.333%;
+        padding: 0;
+        margin: 0;
+      }
       > a {
         margin: 0;
         border: 0;
+        > i:after {
+          @media (min-width: $sm + 1) {
+            content: "";
+            display: block;
+          }
+        }
+        > span.txt {
+          @media (max-width: $sm) {
+            display: none;
+          }
+        }
       }
       &.active > a {
         border: 0;
@@ -80,17 +126,31 @@ nav {
 }
 
 .container-fluid {
-  height: 100%;
   margin-left: 80px;
   background: #ebebeb;
   box-shadow: -1px 0 10px 0 rgba(0,0,0,0.95);
+  @media (min-width: $md+1) {
+    height: 100%;
+  }
+  @media (max-width: $sm) {
+    margin-left: 0;
+    margin-top: 47px;
+  }
   .detail {
     display: none;
+  }
+
+  .row > div {
+    @media (max-width: $md) {
+      width: 100%;
+      float: none;
+      left: auto;
+      right: auto;
+    }
   }
 }
 
 .content {
-
 	padding:10px;
 }
 
@@ -192,9 +252,60 @@ text.title {
   shape-rendering: crispEdges;
 }
 
-.point {
-  //stroke: white;
-  //stroke-width: 1px;
+#usmap {
+
+  .background {
+    fill:#fff;
+  }
+  #mapGroup {
+    #states {
+      path {
+        fill-opacity: 0.75;
+        stroke-opacity:0.95;
+        stroke-width: .5px;
+        &.quoted:hover {
+          cursor: pointer;
+          fill-opacity: 1.0;
+          stroke-opacity:1.0;
+        }
+        &.active {
+          fill: #ddd;
+          stroke: #fff;
+          fill-opacity:1;
+          stroke-opacity:1;
+          &:hover {
+            cursor: default;
+            fill-opacity:1;
+            stroke-opacity:1;
+          }
+        }
+      }
+    }
+    #places {
+      circle {
+        stroke: white;
+        stroke-width: 0.1;
+        fill-opacity: 0.75;
+        &:hover {
+          fill-opacity: 0.95;
+        }
+      }
+    }
+    &.centered {
+      #states path {
+        fill-opacity: 0.1;
+        stroke-opacity: 0.1;
+        &:hover {
+          fill-opacity: 0.25;
+          stroke-opacity: 0.25;
+        }
+        &.active {
+          fill-opacity: 0.85;
+          stroke-opacity: 1.0;
+        }
+      }
+    }
+  }
 }
 
 .horizontalGrid {

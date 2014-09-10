@@ -3,32 +3,14 @@ ANLZ.chart = ANLZ.chart || {};
 
 ANLZ.chart.select = function (btn, myData) {
 
-    var widget = btn.parents('.widget'),
+    var self = this,
+        widget = btn.parents('.widget'),
         chart = widget.attr('id'),
         key = widget.data('key'),
         chartType = btn.data('viz'),
         limit = (chart === "timeline") ? 120 : 30;
 
-    var val = d3.nest()
-        .key(function (d) {
-            return d[key];
-        })
-        .sortKeys(d3.ascending)
-        .rollup(function(leaves) {
-            return {
-                "Number of Quotes": leaves.length,
-                "Number of Quotes Sold": d3.sum(leaves, function(d) {
-                    return d["Number of Quotes Sold"];
-                }),
-                "Total Premium Quoted": d3.sum(leaves, function(d) {
-                    return d["Total Premium Quoted"];
-                }),
-                "Total Premium Sold": d3.sum(leaves, function(d) {
-                    return d["Total Premium Sold"];
-                })
-            }
-        })
-        .entries(myData);
+    var val = self.nest(key, myData);
 
     btn.siblings().removeAttr("disabled");
     widget.find('.total-select button').removeAttr("disabled");
@@ -82,6 +64,31 @@ ANLZ.chart.select = function (btn, myData) {
     //console.log("fired on " + chart);
 };
 
+ANLZ.chart.nest = function(key, data) {
+
+    var nest = d3.nest()
+        .key(function (d) {
+            return d[key];
+        })
+        .sortKeys(d3.ascending)
+        .rollup(function(leaves) {
+            return {
+                "Number of Quotes": leaves.length,
+                "Number of Quotes Sold": d3.sum(leaves, function(d) {
+                    return d["Number of Quotes Sold"];
+                }),
+                "Total Premium Quoted": d3.sum(leaves, function(d) {
+                    return d["Total Premium Quoted"];
+                }),
+                "Total Premium Sold": d3.sum(leaves, function(d) {
+                    return d["Total Premium Sold"];
+                })
+            }
+        })
+        .entries(data);
+
+    return nest;
+};
 
 ANLZ.chart.clear = function (chart) {
     $('#' + chart).find('.chart').empty();

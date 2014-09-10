@@ -2,12 +2,14 @@
 <html>
 <head>
 <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
 
-<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.css" />
-<link rel="stylesheet" type="text/css" href="css/icomoon.css" />
-<link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/icomoon.css" />
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.min.js"></script>
 </head>
 <body>
 
@@ -16,14 +18,20 @@
         <li class="active">
             <a href="#drilldown" role="tab" data-toggle="tab">
                 <i class="icon-pie"></i>
-                Drilldown
+                <span class="txt">Drilldown</span>
             </a>
         </li>
         <li>
             <a href="#detail" role="tab" data-toggle="tab">
                 <i class="icon-table"></i>
-                Detail
+                <span class="txt">Detail</span>
                 <span class="badge" id="rowCount"></span>
+            </a>
+        </li>
+        <li>
+            <a href="#map" role="tab" data-toggle="tab">
+                <i class="icon-globe"></i>
+                <span class="txt">Map</span>
             </a>
         </li>
     </ul>
@@ -210,6 +218,22 @@
 
     </div>
 
+    <div class="tab-pane" id="map">
+
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="widget" id="usmap">
+
+                    <div class="chart"></div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
 </div>
 
 <div class="loading">
@@ -222,21 +246,23 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.2.0/bootbox.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.8/d3.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.1.0/topojson.min.js"></script>
 
 <script src="js/colorbrewer.js"></script>
 
-<script src="js/settings.js?v=0.4"></script>
-<script src="js/util.js?v=0.4"></script>
-<script src="js/chart.js?v=0.4"></script>
-<script src="js/chart.pie.js?v=0.4"></script>
-<script src="js/chart.bar.js?v=0.4"></script>
-<script src="js/chart.single.js?v=0.4"></script>
-<script src="js/chart.line.js?v=0.4"></script>
-<script src="js/chart.grid.js?v=0.4"></script>
-<script src="js/tip.js?v=0.4"></script>
-<script src="js/filter.js?v=0.4"></script>
-<script src="js/search.js?v=0.4"></script>
-<script src="js/init.js?v=0.4"></script>
+<script src="js/settings.js?v=0.7"></script>
+<script src="js/util.js?v=0.7"></script>
+<script src="js/chart.js?v=0.7"></script>
+<script src="js/chart.pie.js?v=0.7"></script>
+<script src="js/chart.bar.js?v=0.7"></script>
+<script src="js/chart.single.js?v=0.7"></script>
+<script src="js/chart.line.js?v=0.7"></script>
+<script src="js/chart.grid.js?v=0.7"></script>
+<script src="js/map.js?v=0.7"></script>
+<script src="js/tip.js?v=0.7"></script>
+<script src="js/filter.js?v=0.7"></script>
+<script src="js/search.js?v=0.7"></script>
+<script src="js/init.js?v=0.7"></script>
 
 <script>
 
@@ -247,13 +273,10 @@
         ANLZ.init.dropdowns();
         ANLZ.init.filters();
         ANLZ.init.buttons();
-        ANLZ.init.tabs();
         ANLZ.search.load();
         ANLZ.tip.init();
-
-
         ANLZ.init.events();
-
+        ANLZ.init.tabs();
         ANLZ.util.loaded();
     })
     .on("progress", function(event){

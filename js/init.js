@@ -202,18 +202,25 @@ ANLZ.init = {
             iframe.attr("src", "");
             var id = $(e.target).attr("href");
             if (id === "#detail") {
-                $('.loading > div').html(function () {
-                    var count = parseInt($('#rowCount').text()),
-                        warning = ANLZ.filter.rowCountWarning(count),
-                        span = '<span class="badge" style="background: ' + warning.color + '">';
-                    span += count + '</span>';
-                    return "Loading " + span + " rows.<br />" + warning.message;
-                });
-                $('.loading').show();
+                var html = function () {
+                        var count = parseInt($('#rowCount').text()),
+                            warning = ANLZ.filter.rowCountWarning(count),
+                            span = '<span class="badge" style="background: ' + warning.color + '">';
+                        span += count + '</span>';
+                        return "Loading " + span + " rows.<br />" + warning.message;
+                    };
+                ANLZ.util.loading(html);
                 setTimeout(function () {
-                    iframe.attr("src", "detail.html?v=0.4");
+                    iframe.attr("src", ANLZ.settings.detailView);
                 }, 250);
             }
+
+            $.each($('.widget'), function (index, value) {
+                var id = $(value).attr("id");
+                ANLZ.chart.clear(id);
+            });
+
+            $(window).trigger("resize");
         });
 
     },
@@ -235,8 +242,8 @@ ANLZ.init = {
         }).trigger("resize");
 
         document.addEventListener('mousemove', function (e) {
-            ANLZ.util.mouse.x = e.clientX || e.pageX;
-            ANLZ.util.mouse.y = e.clientY || e.pageY
+            ANLZ.util.mouse.x = (e.clientX || e.pageX) + (document.body.scrollLeft || document.documentElement.scrollLeft);
+            ANLZ.util.mouse.y = (e.clientY || e.pageY) + (document.body.scrollTop || document.documentElement.scrollTop);
         }, false);
 
         //allow jquery objects to fire d3 click event

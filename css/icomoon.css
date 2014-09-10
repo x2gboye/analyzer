@@ -23,6 +23,9 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-globe:before {
+    content: "\e607";
+}
 .icon-coin:before {
     content: "\e604";
 }

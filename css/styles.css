@@ -1,20 +1,36 @@
-body, html {
-  height: 100%; }
+@media (min-width: 1280px) {
+  body, html {
+    height: 100%; } }
 
 body {
   background: #333; }
 
 nav {
   width: 80px;
-  float: left;
-  overflow: hidden; }
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: 100; }
+  @media (max-width: 1023px) {
+    nav {
+      width: 100%;
+      background: #ebebeb;
+      padding-bottom: 5px; } }
   nav .nav-pills > li > a {
     position: relative;
     border-radius: 0;
     text-align: center;
     color: rgba(255, 255, 255, 0.85); }
+    @media (max-width: 1023px) {
+      nav .nav-pills > li > a {
+        background: #333;
+        box-shadow: none; } }
     nav .nav-pills > li > a:hover {
       background: transparent; }
+      @media (max-width: 1023px) {
+        nav .nav-pills > li > a:hover {
+          background: #333; } }
     nav .nav-pills > li > a:hover, nav .nav-pills > li > a:active, nav .nav-pills > li > a:focus {
       border: 0 !important;
       outline: none !important; }
@@ -27,22 +43,42 @@ nav {
       margin: 0; }
   nav .nav-pills > li.active > a {
     background: #ebebeb;
-    color: #333;
     box-shadow: -1px 1px 10px 0 rgba(0, 0, 0, 0.95); }
+    @media (max-width: 1023px) {
+      nav .nav-pills > li.active > a {
+        box-shadow: none; } }
     nav .nav-pills > li.active > a:hover, nav .nav-pills > li.active > a:active, nav .nav-pills > li.active > a:focus {
       color: #000;
       background: #ebebeb; }
+      @media (max-width: 1023px) {
+        nav .nav-pills > li.active > a:hover, nav .nav-pills > li.active > a:active, nav .nav-pills > li.active > a:focus {
+          box-shadow: none; } }
     nav .nav-pills > li.active > a > .badge {
       color: #fff; }
+  nav .nav-pills > li.active a, nav .nav-pills > li.active a span.txt {
+    color: #333; }
   nav .nav-tabs {
     margin: 0;
     border: 0; }
     nav .nav-tabs > li {
       margin: 0;
       border: 0; }
+      @media (max-width: 1023px) {
+        nav .nav-tabs > li {
+          float: left;
+          width: 33.333%;
+          padding: 0;
+          margin: 0; } }
       nav .nav-tabs > li > a {
         margin: 0;
         border: 0; }
+        @media (min-width: 1024px) {
+          nav .nav-tabs > li > a > i:after {
+            content: "";
+            display: block; } }
+        @media (max-width: 1023px) {
+          nav .nav-tabs > li > a > span.txt {
+            display: none; } }
       nav .nav-tabs > li.active > a {
         border: 0; }
         nav .nav-tabs > li.active > a:hover {
@@ -50,12 +86,24 @@ nav {
           margin: 0; }
 
 .container-fluid {
-  height: 100%;
   margin-left: 80px;
   background: #ebebeb;
   box-shadow: -1px 0 10px 0 rgba(0, 0, 0, 0.95); }
+  @media (min-width: 1280px) {
+    .container-fluid {
+      height: 100%; } }
+  @media (max-width: 1023px) {
+    .container-fluid {
+      margin-left: 0;
+      margin-top: 47px; } }
   .container-fluid .detail {
     display: none; }
+  @media (max-width: 1279px) {
+    .container-fluid .row > div {
+      width: 100%;
+      float: none;
+      left: auto;
+      right: auto; } }
 
 .content {
   padding: 10px; }
@@ -122,6 +170,41 @@ text.title {
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges; }
+
+#usmap .background {
+  fill: #fff; }
+#usmap #mapGroup #states path {
+  fill-opacity: 0.75;
+  stroke-opacity: 0.95;
+  stroke-width: .5px; }
+  #usmap #mapGroup #states path.quoted:hover {
+    cursor: pointer;
+    fill-opacity: 1.0;
+    stroke-opacity: 1.0; }
+  #usmap #mapGroup #states path.active {
+    fill: #ddd;
+    stroke: #fff;
+    fill-opacity: 1;
+    stroke-opacity: 1; }
+    #usmap #mapGroup #states path.active:hover {
+      cursor: default;
+      fill-opacity: 1;
+      stroke-opacity: 1; }
+#usmap #mapGroup #places circle {
+  stroke: white;
+  stroke-width: 0.1;
+  fill-opacity: 0.75; }
+  #usmap #mapGroup #places circle:hover {
+    fill-opacity: 0.95; }
+#usmap #mapGroup.centered #states path {
+  fill-opacity: 0.1;
+  stroke-opacity: 0.1; }
+  #usmap #mapGroup.centered #states path:hover {
+    fill-opacity: 0.25;
+    stroke-opacity: 0.25; }
+  #usmap #mapGroup.centered #states path.active {
+    fill-opacity: 0.85;
+    stroke-opacity: 1.0; }
 
 .horizontalGrid {
   fill: none;

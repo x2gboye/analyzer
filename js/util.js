@@ -4,7 +4,9 @@ ANLZ.util = {
 
     sizeContainers: function (target) {
 
-        var widgetH = $(window).height() / 2 - 32,
+        var windowW = $(window).width(),
+            windowH = $(window).height(),
+            widgetH = (windowW<1024) ? 350 : windowH / 2 - 32,
             controlH = 45,
             margin = ANLZ.settings.margin,
             width = $(target).width() - margin.left - margin.right,
@@ -18,18 +20,27 @@ ANLZ.util = {
 
     onResize: function (widgets) {
 
-        var self = this;
+        var self = this,
+            tab = $('.container-fluid > .tab-pane.active').attr("id");
 
         $.each(widgets, function (index, value) {
             ANLZ.chart.clear(value);
-            var widget = $("#" + value),
+            var windowH = $(window).height(),
+                windowW = $(window).width(),
+                widget = $("#" + value),
                 chart = widget.find(".chart"),
                 margin = ANLZ.settings.margin,
                 containerW = self.sizeContainers("#" + value).width + margin.left + margin.right,
                 containerH = self.sizeContainers("#" + value).height + margin.top + margin.bottom;
-            if (value === "all") {
-                widget.css("height", ($(window).height() - 32) + "px");
-                widget.find("iframe").css("height", ($(window).height() - 32) + "px");
+            if (value === "all" || value === "usmap") {
+                widget.css("height", function() {
+                    var height = (windowW<1024) ? (windowH - 84) : (windowH - 32);
+                    return height + "px";
+                });
+                widget.find("iframe").css("height", function() {
+                    var height = (windowW<1024) ? (windowH - 84) : (windowH - 32);
+                    return height + "px";
+                });
             }
             else if (value === "filters" || value === "saved") {
                 var tabsH = $('#searchTabs').height();
@@ -41,8 +52,26 @@ ANLZ.util = {
 
         });
 
-        ANLZ.init.clickActiveBtns();
+        if(tab === "map")  {
+            ANLZ.util.loading();
+            ANLZ.map.draw();
+        }
+        else {
+            ANLZ.init.clickActiveBtns();
+        }
 
+
+    },
+
+    loading: function (html) {
+        var div = $('.loading > div');
+        if(html) {
+            div.html(html);
+        }
+        else {
+            div.html("Loading...");
+        }
+        $('.loading').show();
     },
 
     loaded: function () {

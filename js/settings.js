@@ -2,7 +2,11 @@ var ANLZ = ANLZ || {};
 
 ANLZ.settings = {
 
-    dataFile: "data/Quotes.csv",
+    dataFile: "data/Quotes.csv?v=0.7",
+
+    mapJSON: "data/us.json?v=0.7",
+
+    detailView: "detail.html?v=0.7",
 
     fields: [
         "Billing Mode",
@@ -59,6 +63,14 @@ ANLZ.settings = {
 
         return (isPrem) ? [color[2], color[3]] : [color[0], color[1]];
 
+    },
+
+    mapColors: function() {
+        var colors = [];
+        colors = colors.concat(colorbrewer.Blues[6]);
+        colors.reverse();
+
+        return colors;
     }
 
 };
