@@ -255,7 +255,8 @@ text.title {
 #usmap {
 
   .background {
-    fill:#fff;
+    fill:white;
+    fill-opacity:0.45;
   }
   #mapGroup {
     #states {
@@ -264,19 +265,19 @@ text.title {
         stroke-opacity:0.95;
         stroke-width: .5px;
         &.quoted:hover {
-          cursor: pointer;
+          cursor:zoom-in;
           fill-opacity: 1.0;
           stroke-opacity:1.0;
         }
         &.active {
-          fill: #ddd;
-          stroke: #fff;
+          fill: #fff;
+          stroke: #ddd;
           fill-opacity:1;
           stroke-opacity:1;
           &:hover {
-            cursor: default;
-            fill-opacity:1;
-            stroke-opacity:1;
+            cursor:zoom-out;
+            fill-opacity:0;
+            stroke-opacity:0;
           }
         }
       }
@@ -285,7 +286,7 @@ text.title {
       circle {
         stroke: white;
         stroke-width: 0.1;
-        fill-opacity: 0.75;
+        fill-opacity: 0.65;
         &:hover {
           fill-opacity: 0.95;
         }
@@ -293,15 +294,22 @@ text.title {
     }
     &.centered {
       #states path {
-        fill-opacity: 0.1;
-        stroke-opacity: 0.1;
+        fill-opacity: 0.25;
+        stroke-opacity: 0.25;
         &:hover {
-          fill-opacity: 0.25;
-          stroke-opacity: 0.25;
+          cursor:zoom-out;
+          fill-opacity: 0.50;
+          stroke-opacity: 0.50;
+        }
+        &.quoted:hover {
+          cursor:zoom-in;
         }
         &.active {
-          fill-opacity: 0.85;
-          stroke-opacity: 1.0;
+          fill-opacity: 0;
+          stroke-opacity:0.25;
+          &:hover {
+            cursor:zoom-out;
+          }
         }
       }
     }

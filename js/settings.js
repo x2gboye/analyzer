@@ -2,11 +2,11 @@ var ANLZ = ANLZ || {};
 
 ANLZ.settings = {
 
-    dataFile: "data/Quotes.csv?v=0.7",
+    dataFile: "data/Quotes.csv?v=0.9",
 
-    mapJSON: "data/us.json?v=0.7",
+    mapJSON: "data/us.json?v=0.9",
 
-    detailView: "detail.html?v=0.7",
+    detailView: "detail.html?v=0.9",
 
     fields: [
         "Billing Mode",

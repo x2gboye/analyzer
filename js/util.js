@@ -54,7 +54,7 @@ ANLZ.util = {
 
         if(tab === "map")  {
             ANLZ.util.loading();
-            ANLZ.map.draw();
+            ANLZ.map.init();
         }
         else {
             ANLZ.init.clickActiveBtns();
