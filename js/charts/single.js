@@ -1,33 +1,52 @@
-var ANLZ = ANLZ || {};
-ANLZ.chart = ANLZ.chart || {};
+function singleChart(parent, data) {
 
-ANLZ.chart.single = function (field, data, target) {
+    var self = this;
 
-    var settings = ANLZ.settings,
-        util = ANLZ.util,
-        filter = ANLZ.filter,
-        container = util.sizeContainers(target),
-        margin = settings.margin;
+    self.parent = parent;
+    self.root = self.parent.root;
+    self.key = self.parent.key;
+    self.id = self.parent.id;
 
-    if(target === "#timeline") {
-        data = filter.saleMade(data);
-    }
+    self.widget = self.parent.widget;
+    self.total = self.parent.total;
+    self.sold = self.parent.sold;
+    self.isPrem = self.parent.isPrem;
+    self.color = self.parent.colorPrem(self.isPrem);
 
-    if(data.length>0) {
+    var margin = self.parent.margin;
+    var container = self.parent.sizeContainers(self.widget);
 
-        var q = data[0].values["Number of Quotes"],
-            qS = data[0].values["Number of Quotes Sold"],
-            p = data[0].values["Total Premium Quoted"],
-            pS = data[0].values["Total Premium Sold"],
-            data = {
-                quotes: [],
-                premium: []
-            };
 
-        data.quotes.push(q - qS);
-        data.quotes.push(qS);
-        data.premium.push(p - pS);
-        data.premium.push(pS);
+    var q = data[0].values["Number of Quotes"],
+        qS = data[0].values["Number of Quotes Sold"],
+        p = data[0].values["Total Premium Quoted"],
+        pS = data[0].values["Total Premium Sold"],
+        data = {
+            quotes: [],
+            premium: []
+        };
+
+    data.quotes.push(q - qS);
+    data.quotes.push(qS);
+    data.premium.push(p - pS);
+    data.premium.push(pS);
+
+
+    /* Public Methods ------------------------------------------------------------------------------------------------
+     ---------------------------------------------------------------------------------------------------------------- */
+
+    self.init = function () {
+
+        initSettings();
+        drawSVG();
+
+    };
+
+
+    /* Private Methods ------------------------------------------------------------------------------------------------
+     ---------------------------------------------------------------------------------------------------------------- */
+
+    function initSettings() {
 
         var radius = Math.min(container.width, container.height)/4,
             labelr = radius - 40;
@@ -52,31 +71,42 @@ ANLZ.chart.single = function (field, data, target) {
             return { x: labelX, y: labelY };
         };
 
-        var table = $(target + " .chart table");
+        var table = $("#" + self.id + " .chart table");
 
-        var svg = d3.select(target + " .chart")
+        self.radius = radius;
+        self.pie = pie;
+        self.arc = arc;
+        self.arcLabel = arcLabel;
+        self.table = table;
+
+    }
+
+
+    function drawSVG() {
+
+        var svg = d3.select("#" + self.id + " .chart")
             .append("svg")
             .attr("width", container.width + margin.left + margin.right)
-            .attr("height", container.height - table.height() + 40)
-            .attr("viewBox", "0, 0, " + (container.width + margin.left + margin.right) + ", " + (container.height - table.height() + 40));
+            .attr("height", container.height - self.table.height() + 40)
+            .attr("viewBox", "0, 0, " + (container.width + margin.left + margin.right) + ", " + (container.height - self.table.height() + 40));
 
         for(j=0; j<d3.keys(data).length; j++) {
 
             var isPrem = (j===0) ? false : true,
-                color = settings.colorPrem(isPrem);
+                color = self.parent.colorPrem(isPrem);
 
             var chart = svg.append("g")
                 .attr("class", "pie")
                 .attr("transform", function() {
-                    var x = (container.width/(2-j)) - radius/2,
-                        y = radius+10;
+                    var x = (container.width/(2-j)) - self.radius/2,
+                        y = self.radius+10;
                     return "translate(" + x + "," + y + ")";
                 });
 
             var g = chart.selectAll(".arc")
                 .data(function() {
                     var val = (isPrem) ? data.premium : data.quotes;
-                    return pie(val);
+                    return self.pie(val);
                 })
                 .enter().append("g")
                 .attr("class", "arc");
@@ -91,13 +121,13 @@ ANLZ.chart.single = function (field, data, target) {
                 .attr("d", d3.svg.arc().outerRadius(0).innerRadius(0))
                 .transition()
                 .duration(500)
-                .attr("d", arc);
+                .attr("d", self.arc);
 
             //label
             var label = g.append("text")
                 .attr("class", "pieLabel")
                 .attr("transform", function(d) {
-                    var label = arcLabel(arc.centroid(d));
+                    var label = self.arcLabel(self.arc.centroid(d));
                     return "translate(" + label.x +  ',' + label.y +  ")";
                 })
                 .attr("text-anchor", "middle")
@@ -112,7 +142,7 @@ ANLZ.chart.single = function (field, data, target) {
             chart.append("text")
                 .attr("class", "title")
                 .attr("y", function() {
-                    return radius+20;
+                    return self.radius+20;
                 })
                 .text(function() {
                     var t = (isPrem) ? "Premium" : "Quotes";
@@ -121,15 +151,7 @@ ANLZ.chart.single = function (field, data, target) {
 
         }
 
-    }//end if there is data
-    else {
-        //no data
-        var svg = d3.select(target + " .chart")
-            .append("div")
-            .attr("class", "no-data")
-            .append("span")
-            .text("No data for: " + field + " given your search criteria");
+
     }
 
-
-};
+}

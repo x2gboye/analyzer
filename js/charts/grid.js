@@ -1,23 +1,21 @@
-var ANLZ = ANLZ || {};
-ANLZ.chart = ANLZ.chart || {};
+function grid(parent, data) {
 
-ANLZ.chart.grid= function (field, data, target) {
+    var self = this;
 
-    var filter = ANLZ.filter,
-        util = ANLZ.util;
+    self.parent = parent;
+    self.root = self.parent.root;
+    self.key = self.parent.key;
+    self.id = self.parent.id;
 
-    if(target != "#timeline") {
-        data = data.sort(function(a, b) {
-            return b.values["Number of Quotes"] - a.values["Number of Quotes"];
-        });
-    }
-    else {
-        data = filter.saleMade(data);
-    }
 
-    if(data.length>0) {
 
-        var grid = d3.select(target + " .chart")
+
+    /* Public Methods ------------------------------------------------------------------------------------------------
+     ---------------------------------------------------------------------------------------------------------------- */
+
+    self.init = function () {
+
+        var grid = d3.select("#" + self.id + " .chart")
             .append("table")
             .attr("class", "table table-hover")
 
@@ -25,7 +23,7 @@ ANLZ.chart.grid= function (field, data, target) {
             .append("tr");
 
         headRow.append("th")
-            .text(field);
+            .text(self.key);
 
         for (i = 0; i < d3.keys(data[0].values).length; i++) {
             var key = d3.keys(data[0].values)[i];
@@ -40,15 +38,16 @@ ANLZ.chart.grid= function (field, data, target) {
             .data(data)
             .enter().append("tr")
             .on("click", function (d) {
-                filter.add(field, d.key);
-                if (target === "#prospects" || target === "#timeline") {
-                    filter.skipField(field);
+                var filter = { key: self.key, value: d.key };
+                self.root.addFilter(filter, true);
+                if (self.id === "prospects" || self.id === "timeline") {
+                    self.parent.skipField();
                 }
             });
 
         row.append("td")
             .text(function (d) {
-                var key = (target === "#timeline") ? util.formatDate(d.key) : d.key;
+                var key = (self.id === "timeline") ? self.parent.formatDate(d.key) : d.key;
                 return key;
             });
 
@@ -67,6 +66,11 @@ ANLZ.chart.grid= function (field, data, target) {
                 });
         }
 
-    }
+    };
 
-};
+    /* Private Methods ------------------------------------------------------------------------------------------------
+     ---------------------------------------------------------------------------------------------------------------- */
+
+
+
+}

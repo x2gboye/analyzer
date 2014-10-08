@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
 
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="css/icomoon.css" />
-    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <title>SVG Analyzer</title>
 
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/icomoon.css?v=1" />
+    <link rel="stylesheet" type="text/css" href="css/styles.css?v=1" />
     <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.min.js"></script>
 </head>
 <body>
+
 
 <nav>
     <ul class="nav nav-pills nav-stacked nav-tabs" role="tablist">
@@ -40,177 +42,165 @@
 <div class="container-fluid tab-content">
 
 
-    <div class="tab-pane active" id="drilldown">
+<div class="tab-pane active" id="drilldown">
 
-		<div class="row">
+    <div class="row">
 
-			<div class="col-sm-6">
+        <div class="col-sm-6">
 
-				<div class="widget" id="salespeople" data-key="Sales Person">
-                    <div class="chart"></div>
-                    <div class="controls">
-                        <div class="btn-group total-select">
-                            <button data-total="Number of Quotes"
-                                    data-sold="Number of Quotes Sold"
-                                    type="button"
-                                    class="btn btn-sm btn-default active">
-                                    <i class="icon-bubble"></i><span class="sr-only">Quotes</span>
-                            </button>
-                            <button data-total="Total Premium Quoted"
-                                    data-sold="Total Premium Sold"
-                                    type="button"
-                                    class="btn btn-sm btn-default">
-                                    <i class="icon-coin"></i><span class="sr-only">Premium</span>
-                            </button>
-                        </div>
-                        <div class="btn-group chart-select">
-                            <button data-viz="bar" type="button" class="btn btn-sm btn-default active"><i class="icon-bars"></i><span class="sr-only">Bar</span></button>
-                            <button data-viz="pie" type="button" class="btn btn-sm btn-default"><i class="icon-pie"></i><span class="sr-only">Pie</span></button>
-                            <button data-viz="line" type="button" class="btn btn-sm btn-default"><i class="icon-stats"></i><span class="sr-only">Line</span></button>
-                            <button data-viz="grid" type="button" class="btn btn-sm btn-default"><i class="icon-table"></i><span class="sr-only">Grid</span></button>
-                        </div>
+            <div class="widget" id="organization">
+                <div class="chart"></div>
+                <div class="controls">
+                    <div class="btn-group total-select">
+                        <button data-total="Number of Quotes"
+                                data-sold="Number of Quotes Sold"
+                                data-type="number"
+                                type="button"
+                                class="btn btn-sm btn-default active">
+                            <i class="icon-bubble"></i><span class="sr-only">Quotes</span>
+                        </button>
+                        <button data-total="Total Premium Quoted"
+                                data-sold="Total Premium Sold"
+                                data-type="money"
+                                type="button"
+                                class="btn btn-sm btn-default">
+                            <i class="icon-coin"></i><span class="sr-only">Premium</span>
+                        </button>
                     </div>
-				</div>                
-
-			</div>
-
-			<div class="col-sm-6">
-
-                <div class="widget" id="prospects" data-key="Billing Mode">
-                    <div class="chart"></div>
-                    <div class="controls">
-                        <div class="btn-group total-select">
-                            <button data-total="Number of Quotes"
-                                    data-sold="Number of Quotes Sold"
-                                    type="button"
-                                    class="btn btn-sm btn-default active">
-                                <i class="icon-bubble"></i><span class="sr-only">Quotes</span>
-                            </button>
-                            <button data-total="Total Premium Quoted"
-                                    data-sold="Total Premium Sold"
-                                    type="button"
-                                    class="btn btn-sm btn-default">
-                                <i class="icon-coin"></i><span class="sr-only">Premium</span>
-                            </button>
-                        </div>
-                        <div class="btn-group chart-select">
-                            <button data-viz="bar" type="button" class="btn btn-sm btn-default"><i class="icon-bars"></i><span class="sr-only">Bar</span></button>
-                            <button data-viz="pie" type="button" class="btn btn-sm btn-default active"><i class="icon-pie"></i><span class="sr-only">Pie</span></button>
-                            <button data-viz="line" type="button" class="btn btn-sm btn-default"><i class="icon-stats"></i><span class="sr-only">Line</span></button>
-                            <button data-viz="grid" type="button" class="btn btn-sm btn-default"><i class="icon-table"></i><span class="sr-only">Grid</span></button>
-                        </div>
-                        <label>Select Field:</label>
-                        <div class="btn-group dropup" style="text-align: left;">
-                            <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown">
-                                <span class="text" id="fieldName">Select Field</span> <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu pull-right field-select" role="menu">
-                            </ul>
-                        </div>
+                    <div class="btn-group chart-select">
+                        <button data-viz="bar" type="button" class="btn btn-sm btn-default"><i class="icon-bars"></i><span class="sr-only">Bar</span></button>
+                        <button data-viz="pie" type="button" class="btn btn-sm btn-default"><i class="icon-pie"></i><span class="sr-only">Pie</span></button>
+                        <button data-viz="line" type="button" class="btn btn-sm btn-default"><i class="icon-stats"></i><span class="sr-only">Line</span></button>
+                        <button data-viz="grid" type="button" class="btn btn-sm btn-default"><i class="icon-table"></i><span class="sr-only">Grid</span></button>
                     </div>
-                </div>
-
-            </div>
-
-		</div>
-
-		<div class="row">
-
-		   <div class="col-sm-9 col-sm-push-3">
-
-               <div class="widget" id="timeline" data-key="Quote Year and Month Created">
-                   <div class="chart"></div>
-                   <div class="controls">
-                       <div class="btn-group total-select">
-                           <button data-total="Number of Quotes"
-                                   data-sold="Number of Quotes Sold"
-                                   type="button"
-                                   class="btn btn-sm btn-default active">
-                               <i class="icon-bubble"></i><span class="sr-only">Quotes</span>
-                           </button>
-                           <button data-total="Total Premium Quoted"
-                                   data-sold="Total Premium Sold"
-                                   type="button"
-                                   class="btn btn-sm btn-default">
-                               <i class="icon-coin"></i><span class="sr-only">Premium</span>
-                           </button>
-                       </div>
-                       <div class="btn-group chart-select">
-                           <button data-viz="bar" type="button" class="btn btn-sm btn-default"><i class="icon-bars"></i><span class="sr-only">Bar</span></button>
-                           <button data-viz="line" type="button" class="btn btn-sm btn-default active"><i class="icon-stats"></i><span class="sr-only">Line</span></button>
-                           <button data-viz="grid" type="button" class="btn btn-sm btn-default"><i class="icon-table"></i><span class="sr-only">Grid</span></button>
-                       </div>
-                       <label>Select Field:</label>
-                       <div class="btn-group dropup" style="text-align: left;">
-                           <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown">
-                               <span class="text" id="rangeName">Select Field</span> <span class="caret"></span>
-                           </button>
-                           <ul class="dropdown-menu pull-right range-select" role="menu">
-                           </ul>
-                       </div>
-                   </div>
-               </div>
-
-           </div>
-
-            <div class="col-sm-3 col-sm-pull-9">
-
-                <ul class="nav nav-tabs" id="searchTabs" role="tablist">
-                    <li class="active"><a href="#filters" role="tab" data-toggle="tab">Search Criteria</a></li>
-                    <li><a href="#saved" role="tab" data-toggle="tab">Saved Searches <span class="badge" id="savedCount">0</span></a></li>
-                </ul>
-
-                <div class="tab-content">
-
-                    <div class="widget tab-pane active" id="filters">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Field Name</th>
-                                    <th>Value</th>
-                                    <th class="action"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                        <div class="controls" style="display: none;">
-                            <button id="saveSearch" type="button" class="btn btn-sm btn-default" disabled>
-                                <i class="icon-disk"></i> Save
-                            </button>
-                        </div>
-
-                    </div>
-
-                    <div class="widget tab-pane" id="saved">
-                        <table class="table table-hover">
-                            <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th class="action"></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
-
                 </div>
             </div>
 
-		</div>
+        </div>
+
+        <div class="col-sm-6">
+
+            <div class="widget" id="variable">
+                <div class="chart"></div>
+                <div class="controls">
+                    <div class="btn-group total-select">
+                        <button data-total="Number of Quotes"
+                                data-sold="Number of Quotes Sold"
+                                data-type="number"
+                                type="button"
+                                class="btn btn-sm btn-default active">
+                            <i class="icon-bubble"></i><span class="sr-only">Quotes</span>
+                        </button>
+                        <button data-total="Total Premium Quoted"
+                                data-sold="Total Premium Sold"
+                                data-type="money"
+                                type="button"
+                                class="btn btn-sm btn-default">
+                            <i class="icon-coin"></i><span class="sr-only">Premium</span>
+                        </button>
+                    </div>
+                    <div class="btn-group chart-select">
+                        <button data-viz="bar" type="button" class="btn btn-sm btn-default"><i class="icon-bars"></i><span class="sr-only">Bar</span></button>
+                        <button data-viz="pie" type="button" class="btn btn-sm btn-default"><i class="icon-pie"></i><span class="sr-only">Pie</span></button>
+                        <button data-viz="line" type="button" class="btn btn-sm btn-default"><i class="icon-stats"></i><span class="sr-only">Line</span></button>
+                        <button data-viz="grid" type="button" class="btn btn-sm btn-default"><i class="icon-table"></i><span class="sr-only">Grid</span></button>
+                    </div>
+                    <label>Select Field:</label>
+                    <div class="btn-group dropup" style="text-align: left;">
+                        <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown">
+                            <span class="text" id="fieldName">Select Field</span> <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right field-select" role="menu">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
 
     </div>
 
-    <div class="tab-pane" id="detail">
+    <div class="row">
 
-        <div class="row">
-            <div class="col-sm-12">
+        <div class="col-sm-9 col-sm-push-3">
 
-                <div class="widget" id="all">
+            <div class="widget" id="timeline">
+                <div class="chart"></div>
+                <div class="controls">
+                    <div class="btn-group total-select">
+                        <button data-total="Number of Quotes"
+                                data-sold="Number of Quotes Sold"
+                                data-type="number"
+                                type="button"
+                                class="btn btn-sm btn-default active">
+                            <i class="icon-bubble"></i><span class="sr-only">Quotes</span>
+                        </button>
+                        <button data-total="Total Premium Quoted"
+                                data-sold="Total Premium Sold"
+                                data-type="money"
+                                type="button"
+                                class="btn btn-sm btn-default">
+                            <i class="icon-coin"></i><span class="sr-only">Premium</span>
+                        </button>
+                    </div>
+                    <div class="btn-group chart-select">
+                        <button data-viz="bar" type="button" class="btn btn-sm btn-default"><i class="icon-bars"></i><span class="sr-only">Bar</span></button>
+                        <button data-viz="line" type="button" class="btn btn-sm btn-default"><i class="icon-stats"></i><span class="sr-only">Line</span></button>
+                        <button data-viz="grid" type="button" class="btn btn-sm btn-default"><i class="icon-table"></i><span class="sr-only">Grid</span></button>
+                    </div>
+                    <label>Select Field:</label>
+                    <div class="btn-group dropup" style="text-align: left;">
+                        <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown">
+                            <span class="text" id="rangeName">Select Field</span> <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right field-select" role="menu">
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
-                    <iframe src=""></iframe>
+        </div>
 
+        <div class="col-sm-3 col-sm-pull-9">
+
+            <ul class="nav nav-tabs" id="searchTabs" role="tablist">
+                <li class="active"><a href="#filters" role="tab" data-toggle="tab">Search Criteria</a></li>
+                <li id="searchTab" style="display: none;"><a href="#saved" role="tab" data-toggle="tab">Saved Searches <span class="badge" id="savedCount">0</span></a></li>
+            </ul>
+
+            <div class="tab-content">
+
+                <div class="widget tab-pane active" id="filters">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Field Name</th>
+                            <th>Value</th>
+                            <th class="action"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <div class="controls" style="display: none;">
+                        <button id="saveSearch" type="button" class="btn btn-sm btn-default" disabled>
+                            <i class="icon-disk"></i> Save
+                        </button>
+                    </div>
+
+                </div>
+
+                <div class="widget tab-pane" id="saved">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th class="action"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
 
             </div>
@@ -218,21 +208,39 @@
 
     </div>
 
-    <div class="tab-pane" id="map">
+</div>
 
-        <div class="row">
-            <div class="col-sm-12">
+<div class="tab-pane" id="detail">
 
-                <div class="widget" id="usmap">
+    <div class="row">
+        <div class="col-sm-12">
 
-                    <div class="chart"></div>
+            <div class="widget" id="all">
 
-                </div>
+                <iframe src=""></iframe>
 
             </div>
-        </div>
 
+        </div>
     </div>
+
+</div>
+
+<div class="tab-pane" id="map">
+
+    <div class="row">
+        <div class="col-sm-12">
+
+            <div class="widget" id="usmap">
+
+                <div class="chart"></div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
 
 </div>
 
@@ -240,6 +248,7 @@
     <div>Loading...</div>
 </div>
 
+<!-- hosted libraries -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
@@ -248,47 +257,60 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.8/d3.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.1.0/topojson.min.js"></script>
 
-<script src="js/d3/d3.geo.tile.js"></script>
-<script src="js/colorbrewer.js"></script>
+<!-- plugins --->
+<script src="js/d3/d3.geo.tile.js?v=1"></script>
+<script src="js/colorbrewer.js?v=1"></script>
 
-<script src="js/settings.js?v=0.9"></script>
-<script src="js/util.js?v=0.9"></script>
-<script src="js/chart.js?v=0.9"></script>
-<script src="js/chart.pie.js?v=0.9"></script>
-<script src="js/chart.bar.js?v=0.9"></script>
-<script src="js/chart.single.js?v=0.9"></script>
-<script src="js/chart.line.js?v=0.9"></script>
-<script src="js/chart.grid.js?v=0.9"></script>
-<script src="js/map.js"></script>
-<script src="js/tip.js?v=0.9"></script>
-<script src="js/filter.js?v=0.9"></script>
-<script src="js/search.js?v=0.9"></script>
-<script src="js/init.js?v=0.9"></script>
+<!-- contains column mapping info for the csv -->
+<script src="js/mappings.js?v=1"></script>
+
+<!-- the various chart visualizations -->
+<script src="js/charts/bar.js?v=1"></script>
+<script src="js/charts/pie.js?v=1"></script>
+<script src="js/charts/line.js?v=1"></script>
+<script src="js/charts/grid.js?v=1"></script>
+<script src="js/charts/single.js?v=1"></script>
+
+<!-- the viewModels -->
+<script src="js/vm/searchViewModel.js?v=1"></script>
+<script src="js/vm/filterViewModel.js?v=1"></script>
+<script src="js/vm/widgetViewModel.js?v=1"></script>
+<script src="js/vm/detailViewModel.js?v=1"></script>
+<script src="js/vm/mapViewModel.js?v=1"></script>
+<script src="js/vm/anlzViewModel.js?v=1"></script>
+
 
 <script>
 
+    //manually define the 3 chart widgets
+    //and the default chart for each
+    var allWidgets = [
+        {id:"organization", chartType:"bar"},
+        {id:"variable", chartType:"pie"},
+        {id:"timeline", chartType:"line"}
+    ];
 
-    d3.csv(ANLZ.settings.dataFile, function (error, rows) {
-        if (error) return console.error(error);
-        ANLZ.init.mapData(rows);
-        ANLZ.init.dropdowns();
-        ANLZ.init.filters();
-        ANLZ.init.buttons();
-        ANLZ.search.load();
-        ANLZ.tip.init();
-        ANLZ.init.events();
-        ANLZ.init.tabs();
-        ANLZ.util.loaded();
-    })
-    .on("progress", function(event){
-        //update progress bar
-        if (d3.event.lengthComputable) {
-            var percentComplete = Math.round(d3.event.loaded * 100 / d3.event.total);
-            $('.loading > div').text("Loading: " + percentComplete + "%");
-        }
-    });
+    //create the parent viewModel
+    var anlzViewModel = new AnlzViewModel();
+
+    function init() {
+
+        //pass the widgets to the viewModel
+        allWidgets.forEach(function(v, i) {
+            anlzViewModel.allWidgets.push(v);
+        });
+
+        // call the init() function in the viewModel
+        anlzViewModel.init();
+
+    }
+
+    //start  here
+    init();
 
 </script>
+
+
 
 <!--analytics-->
 <script>
@@ -300,6 +322,7 @@
     ga('create', 'UA-50023950-2', 'auto');
     ga('send', 'pageview');
 </script>
+
 
 </body>
 </html>
